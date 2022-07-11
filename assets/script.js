@@ -41,14 +41,52 @@ const questions = [
 
 const timer = document.querySelector(".timer");
 const start = document.querySelector(".start");
+const displayBox = document.querySelector(".displayBox")
 
 start.addEventListener('click', () => {
+
+  // ************** Timer ************** //
   let totalTime = 50;
   let counter = setInterval(() => {
     totalTime--
     timer.innerText = totalTime;
   }, 1000)
   setTimeout(() => {clearInterval(counter)}, 50000);
+  // ************** Timer ************** //
+
+  // ************** Questions ************** //
+  displayBox.innerHTML = '';
+  const header = document.createElement('h1')
+  const option1 = document.createElement('button')
+  const option2 = document.createElement('button')
+  const option3 = document.createElement('button')
+  const option4 = document.createElement('button')
+  const line = document.createElement('div')
+  const para = document.createElement('p')
+  
+  header.classList.add('header')
+  option1.classList.add('optionBtn')
+  option2.classList.add('optionBtn')
+  option3.classList.add('optionBtn')
+  option4.classList.add('optionBtn')
+  line.classList.add('line')
+  para.classList.add('para')
+
+  header.innerHTML = questions[0].questionText;
+  option1.innerHTML = questions[0].options[0]
+  option2.innerHTML = questions[0].options[1]
+  option3.innerHTML = questions[0].options[2]
+  option4.innerHTML = questions[0].options[3]
+
+  displayBox.appendChild(header)
+  displayBox.appendChild(option1)
+  displayBox.appendChild(option2)
+  displayBox.appendChild(option3)
+  displayBox.appendChild(option4)
+  displayBox.appendChild(line)
+  displayBox.appendChild(para)
+  // ************** Questions ************** //
+  
 })
 
 
