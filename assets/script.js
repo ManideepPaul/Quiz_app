@@ -51,10 +51,11 @@ start.addEventListener('click', () => {
     totalTime--
     timer.innerText = totalTime;
   }, 1000)
-  setTimeout(() => {clearInterval(counter)}, 50000);
+  setTimeout(() => { clearInterval(counter) }, 50000);
   // ************** Timer ************** //
 
   // ************** Questions ************** //
+  let index = 0;
   displayBox.innerHTML = '';
   const header = document.createElement('h1')
   const option1 = document.createElement('button')
@@ -63,7 +64,7 @@ start.addEventListener('click', () => {
   const option4 = document.createElement('button')
   const line = document.createElement('div')
   const para = document.createElement('p')
-  
+
   header.classList.add('header')
   option1.classList.add('optionBtn')
   option2.classList.add('optionBtn')
@@ -72,11 +73,11 @@ start.addEventListener('click', () => {
   line.classList.add('line')
   para.classList.add('para')
 
-  header.innerHTML = questions[0].questionText;
-  option1.innerHTML = questions[0].options[0]
-  option2.innerHTML = questions[0].options[1]
-  option3.innerHTML = questions[0].options[2]
-  option4.innerHTML = questions[0].options[3]
+  header.innerHTML = questions[index].questionText;
+  option1.innerText = questions[index].options[0]
+  option2.innerText = questions[index].options[1]
+  option3.innerText = questions[index].options[2]
+  option4.innerText = questions[index].options[3]
 
   displayBox.appendChild(header)
   displayBox.appendChild(option1)
@@ -86,7 +87,29 @@ start.addEventListener('click', () => {
   displayBox.appendChild(line)
   displayBox.appendChild(para)
   // ************** Questions ************** //
-  
+
+  // ************** Questions Change & Check ************** //
+  const checkAns = (value) => {
+    if (value === questions[index].answer) para.innerText = "Correct!";
+    else para.innerText = "Incorrect!";
+    if(index < 4){
+      index++;
+    } 
+    console.log(index)
+      
+    header.innerHTML = questions[index].questionText;
+    option1.innerText = questions[index].options[0]
+    option2.innerText = questions[index].options[1]
+    option3.innerText = questions[index].options[2]
+    option4.innerText = questions[index].options[3]
+  }
+
+  option1.addEventListener('click', () => { checkAns(option1.innerText) })
+  option2.addEventListener('click', () => { checkAns(option2.innerText) })
+  option3.addEventListener('click', () => { checkAns(option3.innerText) })
+  option4.addEventListener('click', () => { checkAns(option4.innerText) })
+  // ************** Questions Change & Check ************** //
+
 })
 
 
