@@ -2,8 +2,46 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 35px;
 }
 
 .navBar {
   background-color: #218380;
+  height: 6vh;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 94vh;
+}
+
+h1{
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background-color:#218380;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.displayBox {
+  border: 2px solid rgb(205, 205, 205);
+  box-shadow: 8px 5px 3px rgb(205, 205, 205);
+  padding: 50px 40px;
+  border-radius: 25px;
 }
