@@ -38,3 +38,17 @@ const questions = [
     answer: "1. break",
   },
 ];
+
+const timer = document.querySelector(".timer");
+const start = document.querySelector(".start");
+
+start.addEventListener('click', () => {
+  let totalTime = 50;
+  let counter = setInterval(() => {
+    totalTime--
+    timer.innerText = totalTime;
+  }, 1000)
+  setTimeout(() => {clearInterval(counter)}, 50000);
+})
+
+
