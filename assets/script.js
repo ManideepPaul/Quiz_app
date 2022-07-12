@@ -51,7 +51,7 @@ start.addEventListener('click', () => {
   let counter = setInterval(() => {
     totalTime--
     timer.innerText = totalTime;
-    if(totalTime <= 0){
+    if (totalTime <= 0) {
       clearInterval(counter);
     }
   }, 1000)
@@ -60,6 +60,7 @@ start.addEventListener('click', () => {
 
   // ************** Questions ************** //
   let index = 0;
+  let startPage = displayBox.innerHTML;
   displayBox.innerHTML = '';
   const header = document.createElement('h1')
   const option1 = document.createElement('button')
@@ -68,6 +69,9 @@ start.addEventListener('click', () => {
   const option4 = document.createElement('button')
   const line = document.createElement('div')
   const para = document.createElement('p')
+  const span = document.createElement("span")
+  const input = document.createElement("input")
+  const submit = document.createElement("button")
 
   header.classList.add('header')
   option1.classList.add('optionBtn')
@@ -94,19 +98,19 @@ start.addEventListener('click', () => {
 
   // ************** Questions Change & Check ************** //
   const checkAns = (value) => {
-    if (value === questions[index].answer){
+    if (value === questions[index].answer) {
       para.innerText = "Correct!";
       score += 5;
-    } 
-    else{
+    }
+    else {
       para.innerText = "Incorrect!";
       totalTime -= 10;
       score -= 2;
-    } 
-    if(index < 4){
+    }
+    if (index < 4) {
       index++;
-    } 
-      
+    }
+
     header.innerHTML = questions[index].questionText;
     option1.innerText = questions[index].options[0]
     option2.innerText = questions[index].options[1]
@@ -121,14 +125,12 @@ start.addEventListener('click', () => {
   // ************** Questions Change & Check ************** //
 
   // ************** Checking if timer is zero ************** //
-  setInterval(() => {
-    if((totalTime <= 0) || (index === questions.length-1)) {
+  let checkTimer = setInterval(() => {
+    if ((totalTime <= 0) || (index === questions.length - 1)) {
+      clearInterval(checkTimer)
+      clearInterval(counter)
       timer.innerText = 0;
       displayBox.innerHTML = '';
-
-      const span = document.createElement("span")
-      const input = document.createElement("input")
-      const submit = document.createElement("button")
 
       submit.classList.add('btn')
 
@@ -145,6 +147,12 @@ start.addEventListener('click', () => {
     }
   }, 10)
   // ************** Checking if timer is zero ************** //
+
+  submit.addEventListener('click', () => {
+    let initial = input.value;
+    localStorage.setItem('Player', `${initial} - ${score}`)
+    displayBox.innerHTML = startPage;
+  })
 
 })
 
