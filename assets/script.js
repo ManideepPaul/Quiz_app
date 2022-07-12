@@ -40,11 +40,19 @@ const questions = [
 ];
 
 const timer = document.querySelector(".timer");
-const start = document.querySelector(".start");
+const leaderBoard = document.querySelector("#leaderboard")
 const displayBox = document.querySelector(".displayBox")
+const button1 = document.createElement('button')
+const button2  = document.createElement('button')
 
 let score = 0;
-start.addEventListener('click', () => {
+let player = 0;
+
+let startPage = displayBox.innerHTML;
+
+const startQuiz = () => {
+
+  player++; //Player id
 
   // ************** Timer ************** //
   let totalTime = 50;
@@ -60,7 +68,6 @@ start.addEventListener('click', () => {
 
   // ************** Questions ************** //
   let index = 0;
-  let startPage = displayBox.innerHTML;
   displayBox.innerHTML = '';
   const header = document.createElement('h1')
   const option1 = document.createElement('button')
@@ -150,10 +157,42 @@ start.addEventListener('click', () => {
 
   submit.addEventListener('click', () => {
     let initial = input.value;
-    localStorage.setItem('Player', `${initial} - ${score}`)
+    localStorage.setItem(`${player}`, `${initial} - ${score}`)
     displayBox.innerHTML = startPage;
   })
 
+}
+
+leaderBoard.addEventListener('click', () => {
+  displayBox.innerHTML = "";
+
+  const header = document.createElement('h1')
+
+  button1.classList.add('btn')
+  button2.classList.add('btn')
+  header.classList.add('header')
+
+  header.innerText = "Highscores"  
+  button1.innerText = "Go Back"  
+  button2.innerText = "Clear Highscores"  
+
+  displayBox.appendChild(header)
+  for (const key in localStorage) {
+    let para = document.createElement('p');
+    para.innerText = localStorage.getItem(key)
+    displayBox.appendChild(para)
+  }
+  displayBox.appendChild(button1)
+  displayBox.appendChild(button2)
+
 })
 
+button1.addEventListener('click', () => {
+  displayBox.innerHTML = startPage;
+})
+
+button2.addEventListener('click', () => {
+  localStorage.clear();
+  displayBox.innerHTML = startPage;
+})
 
