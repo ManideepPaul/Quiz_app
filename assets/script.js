@@ -50,6 +50,9 @@ start.addEventListener('click', () => {
   let counter = setInterval(() => {
     totalTime--
     timer.innerText = totalTime;
+    if(totalTime <= 0){
+      clearInterval(counter);
+    }
   }, 1000)
   setTimeout(() => { clearInterval(counter) }, 50000);
   // ************** Timer ************** //
@@ -91,7 +94,10 @@ start.addEventListener('click', () => {
   // ************** Questions Change & Check ************** //
   const checkAns = (value) => {
     if (value === questions[index].answer) para.innerText = "Correct!";
-    else para.innerText = "Incorrect!";
+    else{
+      para.innerText = "Incorrect!";
+      totalTime -= 10;
+    } 
     if(index < 4){
       index++;
     } 
