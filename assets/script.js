@@ -40,19 +40,22 @@ const questions = [
 ];
 
 const timer = document.querySelector(".timer");
-const leaderBoard = document.querySelector("#leaderboard")
 const displayBox = document.querySelector(".displayBox")
+
+// ************** used in highscorebox ************** //
+const leaderBoard = document.querySelector("#leaderboard")
+const header = document.createElement('h1')
 const button1 = document.createElement('button')
 const button2  = document.createElement('button')
+// ************** used in highscorebox ************** //
 
-let score = 0;
-let player = 0;
 
-let startPage = displayBox.innerHTML;
+let player = 0; //Player count
+let score = 0; //Score count
+let startPage = displayBox.innerHTML; //Saving the start page for future use.
 
 const startQuiz = () => {
-
-  player++; //Player id
+  player++; 
 
   // ************** Timer ************** //
   let totalTime = 50;
@@ -155,36 +158,38 @@ const startQuiz = () => {
   }, 10)
   // ************** Checking if timer is zero ************** //
 
+  // ************** Setting score and initial in local storage ************** //
   submit.addEventListener('click', () => {
     let initial = input.value;
-    localStorage.setItem(`${player}`, `${initial} - ${score}`)
+    localStorage.setItem(`${player}`, `${initial}:  ${score}`)
+    score = 0
     displayBox.innerHTML = startPage;
   })
+  // ************** Setting score and initial in local storage ************** //
 
 }
 
+// ************** Displaying highscore box ************** //
 leaderBoard.addEventListener('click', () => {
   displayBox.innerHTML = "";
-
-  const header = document.createElement('h1')
-
+  
+  header.classList.add('header')
   button1.classList.add('btn')
   button2.classList.add('btn')
-  header.classList.add('header')
-
+  
   header.innerText = "Highscores"  
   button1.innerText = "Go Back"  
   button2.innerText = "Clear Highscores"  
-
+  
   displayBox.appendChild(header)
-  for (const key in localStorage) {
+  for(const key in localStorage) {
     let para = document.createElement('p');
     para.innerText = localStorage.getItem(key)
     displayBox.appendChild(para)
   }
   displayBox.appendChild(button1)
   displayBox.appendChild(button2)
-
+  
 })
 
 button1.addEventListener('click', () => {
@@ -195,4 +200,5 @@ button2.addEventListener('click', () => {
   localStorage.clear();
   displayBox.innerHTML = startPage;
 })
+// ************** Displaying highscore box ************** //
 
