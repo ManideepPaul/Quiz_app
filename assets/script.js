@@ -43,6 +43,7 @@ const timer = document.querySelector(".timer");
 const start = document.querySelector(".start");
 const displayBox = document.querySelector(".displayBox")
 
+let score = 0;
 start.addEventListener('click', () => {
 
   // ************** Timer ************** //
@@ -93,15 +94,18 @@ start.addEventListener('click', () => {
 
   // ************** Questions Change & Check ************** //
   const checkAns = (value) => {
-    if (value === questions[index].answer) para.innerText = "Correct!";
+    if (value === questions[index].answer){
+      para.innerText = "Correct!";
+      score += 5;
+    } 
     else{
       para.innerText = "Incorrect!";
       totalTime -= 10;
+      score -= 2;
     } 
     if(index < 4){
       index++;
     } 
-    console.log(index)
       
     header.innerHTML = questions[index].questionText;
     option1.innerText = questions[index].options[0]
@@ -115,6 +119,32 @@ start.addEventListener('click', () => {
   option3.addEventListener('click', () => { checkAns(option3.innerText) })
   option4.addEventListener('click', () => { checkAns(option4.innerText) })
   // ************** Questions Change & Check ************** //
+
+  // ************** Checking if timer is zero ************** //
+  setInterval(() => {
+    if((totalTime <= 0) || (index === questions.length-1)) {
+      timer.innerText = 0;
+      displayBox.innerHTML = '';
+
+      const span = document.createElement("span")
+      const input = document.createElement("input")
+      const submit = document.createElement("button")
+
+      submit.classList.add('btn')
+
+      header.innerText = "All done!"
+      para.innerText = `Your final score is ${score}`
+      span.innerText = "Enter initials:"
+      submit.innerText = "Submit";
+
+      displayBox.appendChild(header)
+      displayBox.appendChild(para)
+      displayBox.appendChild(span)
+      displayBox.appendChild(input)
+      displayBox.appendChild(submit)
+    }
+  }, 10)
+  // ************** Checking if timer is zero ************** //
 
 })
 

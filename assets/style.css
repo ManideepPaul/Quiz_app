@@ -64,3 +64,8 @@ h1{
   background-color: black;
   width: 100%;
 }
+
+input {
+  width: 150px;
+  margin: 0 8px;
+}
